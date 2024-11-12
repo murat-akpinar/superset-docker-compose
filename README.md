@@ -27,8 +27,24 @@ Superset, bir web uygulaması olarak çalışır ve backend olarak çeşitli ver
 
 ## Docker Compose ile Superset Kurulumu
 
-Superset’i Docker Compose ile kurmak, hızlı ve kolay bir yöntemdir. Docker Compose dosyanızı çalıştırarak tüm gerekli servisleri (Superset, Redis, veritabanı) başlatabilirsiniz. Aşağıda tipik bir Superset Docker Compose dosyasının yapısı bulunmaktadır:
+- Superset’i Docker Compose ile kurmak, hızlı ve kolay bir yöntemdir. Docker Compose dosyanızı çalıştırarak tüm gerekli servisleri (Superset, Redis, veritabanı) başlatabilirsiniz. Aşağıda tipik bir Superset Docker Compose dosyasının yapısı bulunmaktadır:
 
 ```bash
 docker compose up -d
+```
+
+# Veritabanı Bağlantıları
+- Bazı veri tabanları ön tanımlı olarak imajda yüklü gelmiyor bunları `docker-compose.yml` dosyasında  `command:` bölümüne ekleyebilirsiniz.
+- [Connecting to Databases](https://superset.apache.org/docs/configuration/databases/)
+```bash
+    command:
+      - /bin/sh
+      - -c
+      - |
+        pip install pymssql cx_Oracle && # Bu kısma pip komutlarını ekleyebilirsiniz.
+        superset db upgrade &&
+        superset init &&
+        superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin &&
+        superset run -h 0.0.0.0 -p 8088
+    volumes:
 ```
