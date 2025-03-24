@@ -29,6 +29,13 @@ Superset, bir web uygulaması olarak çalışır ve backend olarak çeşitli ver
 
 - Superset’i Docker Compose ile kurmak, hızlı ve kolay bir yöntemdir. Docker Compose dosyanızı çalıştırarak tüm gerekli servisleri (Superset, Redis, veritabanı) başlatabilirsiniz. Aşağıda tipik bir Superset Docker Compose dosyasının yapısı bulunmaktadır:
 
+
+- Token
+```bash
+python3 -c "import secrets; print(secrets.token_urlsafe(32))"
+
+```
+
 ```bash
 docker compose up -d
 ```
